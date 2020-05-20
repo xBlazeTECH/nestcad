@@ -14,6 +14,13 @@ export class AppController {
         { label: "Link", url: "#" },
         { label: "Disabled", url: "#", disabled: true }
       ],
+      scrollers: [
+        { label: "Dashboard", url: "#", active: true },
+        { label: "Friends", url: "#", badge: { show: true, value: "7", style: "badge-light" }},
+        { label: "Explore", url: "#" },
+        { label: "Suggestions", url: "#" },
+        { label: "Link", url: "#" }
+      ],
       brand: "NestCAD",
       title: "Sample Title",
       message: this.appService.getIndex()
