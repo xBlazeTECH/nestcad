@@ -9,6 +9,10 @@ export class AppController {
   @Render('index')
   index() {
     return {
+      main: {
+        title: "Page Title",
+        lead: "Page Lead"
+      },
       navlinks: [
         { label: "Home", url: "#", active: true },
         { label: "Link", url: "#" },
