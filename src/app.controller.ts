@@ -8,6 +8,12 @@ export class AppController {
   @Get()
   @Render('index')
   index() {
-    return { message: this.appService.getIndex() };
-  }  
+    return { title: "Test Title", message: this.appService.getIndex() };
+  }
+
+  @Get()
+  @Render('index')
+  about() {
+    return { message: "test" };
+  }
 }
