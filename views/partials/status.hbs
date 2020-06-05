@@ -1,4 +1,4 @@
-<main role="main" class="flex-shrink-0">
+<main id="status" role="main" class="flex-shrink-0">
   <div class="container">
     <div id="alert-panic" class="alert alert-danger" role="alert" style="display: none;">Alert Triggered!</div>
     <button id="btnPanic" type="button" class="btn btn-danger btn-lg" onclick="socket.emit('action', { type: 'button', name: 'panic' });">Panic Button</button>

@@ -42,8 +42,9 @@ export class EventsGateway {
       }},
       { event: 'disable', data: { selector: "#btnPanic" }}
     ];
-    
+
     this.server.emit('update', { selector: "#alert-panic", text: "Panic Button has been Triggered!" });
+    this.server.emit('show', { selector: "#alert-panic" });
 
     if (data.type === "button" && data.name === "panic") {
       return from(actions).pipe(map(action => ({ event: action.event, data: action.data })));
