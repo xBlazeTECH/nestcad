@@ -14,16 +14,16 @@ export class EventsGateway {
   @WebSocketServer()
   server: Server;
 
-  @SubscribeMessage('events')
+  @SubscribeMessage('action')
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   findAll(@MessageBody() data: any): Observable<WsResponse<number>> {
-      console.log('events receieved');
-    return from([1, 2, 3]).pipe(map(item => ({ event: 'events', data: item })));
+      console.log('Serverbound Action:' + data);
+    return from([1, 2, 3]).pipe(map(item => ({ event: 'action', data: item })));
   }
 
   @SubscribeMessage('identity')
   async identity(@MessageBody() data: number): Promise<number> {
-      console.log('identity receieved');
+      console.log('Identity: ' + data);
     return data;
   }
 }
