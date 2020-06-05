@@ -8,6 +8,7 @@ import {
 import { from, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Server } from 'socket.io';
+import { Socket } from 'dgram';
   
 @WebSocketGateway(3001)
 export class EventsGateway {
@@ -29,16 +30,20 @@ export class EventsGateway {
 
   @SubscribeMessage('action')
   action(@MessageBody() data: any): Observable<WsResponse<object>> {
-    let actions = [
+    const actions = [
       { event: 'update', data: {
         selector:"#alert-panic",
-        text: "Pressed!"
+        text: "You have triggered your panic button!"
       }},
+      { event: 'show', data: { selector: "#alert-panic" }},
       { event: 'update', data: {
         selector: "#btnPanic",
         text: "Pressed!"
-      }}
+      }},
+      { event: 'disable', data: { selector: "#btnPanic" }}
     ];
+    
+    this.server.emit('update', { selector: "#alert-panic", text: "Panic Button has been Triggered!" });
 
     if (data.type === "button" && data.name === "panic") {
       return from(actions).pipe(map(action => ({ event: action.event, data: action.data })));
