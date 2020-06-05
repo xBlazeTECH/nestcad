@@ -13,12 +13,39 @@ import { Server } from 'socket.io';
 export class EventsGateway {
   @WebSocketServer()
   server: Server;
+/*
+  @SubscribeMessage('action')
+  findAll(@MessageBody() data: any): Observable<WsResponse<number>> {
+    //console.log('Serverbound Action:' + data);
+    if (data.type === "button" && data.name === "panic") {
+      console.log('Panic Button Pressed!');
+
+      // EMIT SENDS TO ALL CONNECTED CLIENTS!
+      this.server.emit('update', { selector:"#alert-panic", text:"Pressed!"})
+    }
+    return from([1, 2, 3]).pipe(map(item => ({ event: 'action', data: item })));
+  }
+*/
 
   @SubscribeMessage('action')
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  findAll(@MessageBody() data: any): Observable<WsResponse<number>> {
-      console.log('Serverbound Action:' + data);
-    return from([1, 2, 3]).pipe(map(item => ({ event: 'action', data: item })));
+  action(@MessageBody() data: any): Observable<WsResponse<object>> {
+    let actions = [
+      { event: 'update', data: {
+        selector:"#alert-panic",
+        text: "Pressed!"
+      }},
+      { event: 'update', data: {
+        selector: "#btnPanic",
+        text: "Pressed!"
+      }}
+    ];
+
+    if (data.type === "button" && data.name === "panic") {
+      return from(actions).pipe(map(action => ({ event: action.event, data: action.data })));
+    } else {
+      return null;
+    }
+
   }
 
   @SubscribeMessage('identity')
