@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100">
+    <head>
+        {{> header }}
+        <link rel="stylesheet" href="/styles/standard.css">
+    </head>
+    <body class="d-flex flex-column h-100">
+        {{> navbar }}
+        {{> scroller }}
+
+        <main role="main" class="flex-shrink-0">
+        <div class="container">
+            <div id="alert-panic" class="alert alert-danger" role="alert" style="display: none;">Alert Triggered!</div>
+            <button id="btnPanic" type="button" class="btn btn-danger btn-lg" onclick="socket.emit('action', { type: 'button', name: 'panic' });">Panic Button</button>
+            <h1 class="mt-5">{{ main.title }}</h1>
+            <p class="lead">{{ main.lead }}</p>
+            <input type="text" /> <input type="button"/>
+        </div>
+        </main>
+
+        {{> footer }}
+        {{> scripts }}
+    </body>
+</html>
