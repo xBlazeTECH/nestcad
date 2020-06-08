@@ -8,10 +8,9 @@ import {
 import { from, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Server } from 'socket.io';
-import { Socket } from 'dgram';
   
 @WebSocketGateway(3001)
-export class EventsGateway {
+export class AppGateway {
   @WebSocketServer()
   server: Server;
 /*
